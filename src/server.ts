@@ -2,13 +2,15 @@ import express from 'express';
 import pool from './db';
 import userRoutes from './routes/userRoutes';
 import authRoutes from './routes/authRoutes';
+import avaliacaoRoutes from './routes/avaliacaoRoutes';
 
 const app = express();
 app.use(express.json());
 
 
-app.use('/auth', authRoutes)
-app.use('/usuarios', userRoutes)
+app.use('/auth', authRoutes);
+app.use('/usuarios', userRoutes);
+app.use('/avaliacoes', avaliacaoRoutes);
 
 
 const PORT = process.env.PORT || 3000;
