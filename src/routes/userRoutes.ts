@@ -1,11 +1,15 @@
 import { Router } from 'express';
-import { createUser, listUsers } from '../controllers/UserController';
+import { createUser, listUsers, getUserById, updateUser, deleteUser } from '../controllers/UserController';
 import { authMiddleware } from '../middlewares/authMiddleware';
 
 const router = Router();
 
-// Quando alguém mandar um POST para /, chamamos a função createUser
+
 router.post('/', createUser);
-router.get('/', authMiddleware, listUsers);
+router.use(authMiddleware);
+router.get('/', listUsers);
+router.get('/:id', getUserById);
+router.put('/:id', updateUser);
+router.delete('/:id', deleteUser);
 
 export default router;

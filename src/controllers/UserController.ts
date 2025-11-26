@@ -51,3 +51,76 @@ export const listUsers = async (req: Request, res: Response) => {
         return res.status(500).json({ error: 'Erro ao listar usuários' });
     }
 };
+
+export const getUserById = async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params;
+        
+        const result = await pool.query(
+            'SELECT id, nome_completo, email, cargo, perfil, data_admissao FROM usuarios WHERE id = $1',
+            [id]
+        );
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({ error: 'Usuário não encontrado' });
+        }
+
+        return res.json(result.rows[0]);
+    } catch (error) {
+        return res.status(500).json({ error: 'Erro ao buscar usuário' });
+    }
+};
+
+export const updateUser = async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params;
+        const { nome_completo, cargo, email } = req.body; // Vamos permitir editar isso
+
+        // Verifica se o usuário existe antes de tentar editar
+        const checkUser = await pool.query('SELECT * FROM usuarios WHERE id = $1', [id]);
+        if (checkUser.rows.length === 0) {
+            return res.status(404).json({ error: 'Usuário não encontrado' });
+        }
+
+        const query = `
+            UPDATE usuarios 
+            SET nome_completo = $1, cargo = $2, email = $3
+            WHERE id = $4
+            RETURNING id, nome_completo, cargo, email;
+        `;
+
+        const result = await pool.query(query, [nome_completo, cargo, email, id]);
+
+        return res.json({
+            message: 'Dados atualizados com sucesso!',
+            user: result.rows[0]
+        });
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: 'Erro ao atualizar usuário' });
+    }
+};
+
+export const deleteUser = async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params;
+
+        
+        const result = await pool.query('DELETE FROM usuarios WHERE id = $1 RETURNING id', [id]);
+
+        if (result.rowCount === 0) {
+            return res.status(404).json({ error: 'Usuário não encontrado' });
+        }
+
+        return res.json({ message: 'Usuário deletado com sucesso!' });
+
+    } catch (error) {
+        console.error(error);
+        // Tratamento simples para o erro de chave estrangeira
+        if ((error as any).code === '23503') {
+            return res.status(400).json({ error: 'Não é possível deletar este usuário pois ele possui registros vinculados (avaliações, etc).' });
+        }
+        return res.status(500).json({ error: 'Erro ao deletar usuário' });
+    }
+};
