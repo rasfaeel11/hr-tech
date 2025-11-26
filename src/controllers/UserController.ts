@@ -37,4 +37,17 @@ export const createUser = async (req: Request, res: Response) => {
         console.error(error);
         return res.status(500).json({ error: 'Erro ao criar usuário' });
     }
+
+    
+};
+
+export const listUsers = async (req: Request, res: Response) => {
+    try {
+        // Busca ID e Nome de todo mundo (evite trazer a senha!)
+        const result = await pool.query('SELECT id, nome_completo, email, cargo, perfil FROM usuarios');
+        return res.json(result.rows);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: 'Erro ao listar usuários' });
+    }
 };
