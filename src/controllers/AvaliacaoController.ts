@@ -2,28 +2,41 @@ import { Request, Response } from 'express';
 import pool from '../db';
 
 export const criarAvaliacao = async (req: Request, res: Response) => {
-    // Pegamos um "cliente" do pool para poder controlar a transação manualmente
     const client = await pool.connect();
 
     try {
         const { avaliado_id, tipo, periodo, itens } = req.body;
-        // O "avaliador_id" vem do Token (quem está logado), lembra do middleware?
         const avaliador_id = (req as any).usuarioId; 
 
-        // 1. INICIAR TRANSAÇÃO (Começa o modo de segurança)
+        // --- CORREÇÃO: CALCULAR A MÉDIA ---
+        // Se não tiver itens, a nota é 0. Se tiver, soma tudo e divide pela quantidade.
+        let mediaCalculada = 0;
+        if (itens && itens.length > 0) {
+            const soma = itens.reduce((acc: number, item: any) => acc + Number(item.nota), 0);
+            mediaCalculada = soma / itens.length;
+        }
+        // ----------------------------------
+
         await client.query('BEGIN');
 
-        // 2. Criar a "Capa" da avaliação na tabela principal
+        // Agora inserimos a 'mediaCalculada' no campo 'nota_final'
         const avaliacaoQuery = `
-            INSERT INTO avaliacoes (avaliado_id, avaliador_id, tipo, periodo, data_avaliacao)
-            VALUES ($1, $2, $3, $4, NOW())
+            INSERT INTO avaliacoes (avaliado_id, avaliador_id, tipo, periodo, nota_final, data_avaliacao)
+            VALUES ($1, $2, $3, $4, $5, NOW())
             RETURNING id;
         `;
-        const avaliacaoResult = await client.query(avaliacaoQuery, [avaliado_id, avaliador_id, tipo, periodo]);
+        
+        // Adicionamos mediaCalculada no array de valores ($5)
+        const avaliacaoResult = await client.query(avaliacaoQuery, [
+            avaliado_id, 
+            avaliador_id, 
+            tipo, 
+            periodo, 
+            mediaCalculada
+        ]);
+        
         const novaAvaliacaoId = avaliacaoResult.rows[0].id;
 
-        // 3. Salvar cada item (nota) da lista
-        // "itens" é um array que vem do Front-end
         const itemQuery = `
             INSERT INTO itens_avaliacao (avaliacao_id, competencia, nota, comentario)
             VALUES ($1, $2, $3, $4)
@@ -38,7 +51,6 @@ export const criarAvaliacao = async (req: Request, res: Response) => {
             ]);
         }
 
-        // 4. FINALIZAR TRANSAÇÃO (Salva tudo de verdade)
         await client.query('COMMIT');
 
         return res.status(201).json({ 
@@ -47,12 +59,11 @@ export const criarAvaliacao = async (req: Request, res: Response) => {
         });
 
     } catch (error) {
-        // Se der qualquer erro, DESFAZ TUDO (Rollback)
         await client.query('ROLLBACK');
         console.error(error);
         return res.status(500).json({ error: 'Erro ao registrar avaliação.' });
     } finally {
-        client.release(); // Solta a conexão
+        client.release();
     }
 };
 

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RH System | Nova Avaliação</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylespecfic" href="css/avaliar.css">
+</head>
+<body>
+
+    <nav class="navbar" style="background-color: var(--primary-color); height: 60px; display: flex; align-items: center; padding: 0 2rem; position: fixed; top: 0; width: 100%; z-index: 100;">
+        <div style="color: white; font-weight: bold; font-size: 20px;">RH System</div>
+        <div class="menu" style="margin-left: auto;">
+            <a href="/dashboard.html" style="color: white; text-decoration: none; margin-right: 20px;">Dashboard</a>
+            <a href="/funcionarios.html" style="color: white; text-decoration: none; margin-right: 20px;">Funcionários</a>
+            <a href="/avaliar.html" style="color: white; text-decoration: none; margin-right: 20px; font-weight: bold;">Avaliar</a>
+            <button onclick="localStorage.clear(); window.location.href='/'" class="btn-logout" style="background: rgba(255,255,255,0.2); border: none; color: white; padding: 5px 15px; border-radius: 4px; cursor: pointer;">Sair</button>
+        </div>
+    </nav>
+
+    <div class="container" style="padding-top: 80px; max-width: 1000px; margin: 0 auto;">
+        <h1>Nova Avaliação de Desempenho</h1>
+        <p style="margin-bottom: 20px; color: #666;">Preencha os dados abaixo para registrar a performance.</p>
+
+        <form id="formAvaliacao">
+            
+            <div class="form-section">
+                <h3>1. Dados Gerais</h3>
+                <div style="display: flex; gap: 20px;">
+                    <div class="input-group" style="flex: 1;">
+                        <label>Funcionário (Avaliado)</label>
+                        <select id="selectFuncionario" required style="width: 100%; padding: 10px;">
+                            <option value="">Carregando...</option>
+                        </select>
+                    </div>
+                    <div class="input-group" style="flex: 1;">
+                        <label>Tipo de Avaliação</label>
+                        <select id="tipoAvaliacao" style="width: 100%; padding: 10px;">
+                            <option value="TECNICA">Técnica (Hard Skills)</option>
+                            <option value="COMPORTAMENTAL">Comportamental (Soft Skills)</option>
+                            <option value="360">Avaliação 360º</option>
+                        </select>
+                    </div>
+                    <div class="input-group" style="flex: 1;">
+                        <label>Período (Referência)</label>
+                        <input type="text" id="periodo" placeholder="Ex: 2024-Q1" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>2. Critérios de Avaliação</h3>
+                <div class="avaliacao-grid">
+                    
+                    <div class="competencia-card">
+                        <h4>💻 Habilidade Técnica</h4>
+                        <div class="input-group">
+                            <label>Nota (0 a 10)</label>
+                            <input type="number" id="nota1" min="0" max="10" step="0.1" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Feedback</label>
+                            <textarea id="obs1" placeholder="Pontos fortes/fracos..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="competencia-card">
+                        <h4>🤝 Trabalho em Equipe</h4>
+                        <div class="input-group">
+                            <label>Nota (0 a 10)</label>
+                            <input type="number" id="nota2" min="0" max="10" step="0.1" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Feedback</label>
+                            <textarea id="obs2" placeholder="Comunicação, empatia..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="competencia-card">
+                        <h4>🚀 Proatividade</h4>
+                        <div class="input-group">
+                            <label>Nota (0 a 10)</label>
+                            <input type="number" id="nota3" min="0" max="10" step="0.1" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Feedback</label>
+                            <textarea id="obs3" placeholder="Iniciativa, autonomia..."></textarea>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 18px;">FINALIZAR AVALIAÇÃO</button>
+        </form>
+    </div>
+
+    <script src="js/avaliar.js"></script>
+</body>
+</html>

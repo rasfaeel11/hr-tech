@@ -17,7 +17,6 @@ app.use(express.json());
 // --- 2. COMANDO MÁGICO QUE FALTAVA ---
 // Isso diz: "Express, entregue os arquivos da pasta 'public' para quem acessar o site"
 const caminhoPublic = path.join(__dirname, '../public');
-console.log("📂 O servidor está buscando o site nesta pasta:", caminhoPublic)
 app.use(express.static(caminhoPublic));
 // -------------------------------------
 

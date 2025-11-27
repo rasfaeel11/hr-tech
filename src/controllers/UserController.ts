@@ -44,7 +44,7 @@ export const createUser = async (req: Request, res: Response) => {
 export const listUsers = async (req: Request, res: Response) => {
     try {
         // Busca ID e Nome de todo mundo (evite trazer a senha!)
-        const result = await pool.query('SELECT id, nome_completo, email, cargo, perfil FROM usuarios');
+        const result = await pool.query('SELECT id, nome_completo, email, cargo, perfil, ativo FROM usuarios');
         return res.json(result.rows);
     } catch (error) {
         console.error(error);

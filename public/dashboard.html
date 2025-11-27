@@ -8,13 +8,20 @@
     <link rel="stylesheet" href="css/dashboard.css"> </head>
 <body>
 
-    <nav class="navbar">
-        <div class="brand">RH System</div>
-        <div class="user-info">
-            <span id="userName">Carregando...</span>
-            <button onclick="logout()" class="btn-logout">Sair</button>
-        </div>
-    </nav>
+<nav class="navbar">
+    <div class="brand">RH System</div>
+
+    <ul class="menu">
+        <li><a href="/dashboard.html">Dashboard</a></li>
+        <li><a href="/funcionarios.html">Funcionários</a></li>
+        <li><a href="/avaliar.html">Avaliar</a></li>
+    </ul>
+
+    <div class="user-info">
+        <span id="userName">Carregando...</span>
+        <button onclick="logout()" class="btn-logout">Sair</button>
+    </div>
+</nav>
 
     <div class="container">
         <h1>Visão Geral</h1>

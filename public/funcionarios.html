@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RH System | Funcionários</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/funcionarios.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="brand">RH System</div>
+        <div class="menu">
+            <a href="/dashboard.html">Dashboard</a>
+            <a href="/funcionarios.html" class="active">Funcionários</a>
+            <button onclick="logout()" class="btn-logout">Sair</button>
+        </div>
+    </nav>
+
+    <div class="container" style="padding-top: 80px;">
+        <div class="header-flex">
+            <h1>Gestão de Pessoas</h1>
+            <button class="btn btn-primary" onclick="abrirModal('modalCadastro')">+ Novo Funcionário</button>
+        </div>
+
+        <div class="card" style="max-width: 100%; overflow-x: auto;">
+            <table class="tabela-rh">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Cargo</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="listaFuncionarios">
+                    </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="modalCadastro" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="fecharModal('modalCadastro')">&times;</span>
+            <h2>Novo Colaborador</h2>
+            <form id="formCadastro">
+                <div class="input-group">
+                    <label>Nome Completo</label>
+                    <input type="text" id="cadNome" required>
+                </div>
+                <div class="input-group">
+                    <label>Email</label>
+                    <input type="email" id="cadEmail" required>
+                </div>
+                <div class="input-group">
+                    <label>Senha Inicial</label>
+                    <input type="password" id="cadSenha" required>
+                </div>
+                <div class="input-group">
+                    <label>Cargo</label>
+                    <input type="text" id="cadCargo" placeholder="Ex: Analista Jr" required>
+                </div>
+                <div class="input-group">
+                    <label>Perfil de Acesso</label>
+                    <select id="cadPerfil" style="width: 100%; padding: 10px;">
+                        <option value="FUNCIONARIO">Funcionário</option>
+                        <option value="GESTOR">Gestor</option>
+                        <option value="GESTOR_RH">Gestor RH</option>
+                        <option value="ADMIN">Admin</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="modalPromover" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="fecharModal('modalPromover')">&times;</span>
+            <h2>Promover Funcionário</h2>
+            <form id="formPromover">
+                <input type="hidden" id="idPromover">
+                <p>Funcionário: <strong id="nomePromover">...</strong></p>
+                <div class="input-group">
+                    <label>Novo Cargo</label>
+                    <input type="text" id="novoCargo" required>
+                </div>
+                <div class="input-group">
+                    <label>Motivo / Observação</label>
+                    <input type="text" id="motivoPromocao" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="background-color: var(--success)">Confirmar Promoção</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="modalDemitir" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="fecharModal('modalDemitir')">&times;</span>
+            <h2 style="color: var(--danger)">Demitir Funcionário</h2>
+            <form id="formDemitir">
+                <input type="hidden" id="idDemitir">
+                <p>Tem certeza que deseja desligar <strong id="nomeDemitir">...</strong>?</p>
+                <div class="input-group">
+                    <label>Motivo do Desligamento</label>
+                    <input type="text" id="motivoDemissao" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="background-color: var(--danger)">Confirmar Demissão</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/funcionarios.js"></script>
+</body>
+</html>
