@@ -1,0 +1,84 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+    --primary-color: #2c3e50; 
+    --secondary-color: #3498db; 
+    --bg-color: #ecf0f1; 
+    --text-color: #333;
+    --white: #ffffff;
+    --danger: #e74c3c; 
+    --success: #27ae60;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    height: 100vh;
+    display: flex; /* Centraliza tudo por padrão, mudaremos nas páginas internas */
+    justify-content: center;
+    align-items: center;
+}
+
+/* ESTILO PADRÃO DE BOTÃO */
+.btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.btn-primary {
+    background-color: var(--secondary-color);
+    color: var(--white);
+}
+
+.btn-primary:hover {
+    background-color: #2980b9;
+}
+
+/* ESTILO PADRÃO DE CARD */
+.card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+/* ESTILO PADRÃO DE INPUT */
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.error-msg {
+    color: var(--danger);
+    font-size: 14px;
+    margin-top: 10px;
+    display: none;
+    text-align: center;
+}

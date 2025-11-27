@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RH System | Dashboard</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/dashboard.css"> </head>
+<body>
+
+    <nav class="navbar">
+        <div class="brand">RH System</div>
+        <div class="user-info">
+            <span id="userName">Carregando...</span>
+            <button onclick="logout()" class="btn-logout">Sair</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Visão Geral</h1>
+
+        <div class="cards-grid">
+            <div class="card-stat">
+                <h3>Total Funcionários</h3>
+                <p class="big-number" id="totalFunc">0</p>
+            </div>
+            <div class="card-stat">
+                <h3>Ativos</h3>
+                <p class="big-number" id="totalAtivos" style="color: var(--success)">0</p>
+            </div>
+            <div class="card-stat">
+                <h3>Desligados</h3>
+                <p class="big-number" id="totalDesligados" style="color: var(--danger)">0</p>
+            </div>
+            <div class="card-stat">
+                <h3>Demissões (30 dias)</h3>
+                <p class="big-number" id="turnover">0</p>
+            </div>
+        </div>
+
+        <div class="content-row">
+            <div class="card chart-section">
+                <h3>Média de Desempenho por Cargo</h3>
+                <div id="chartContainer" class="chart-container">
+                    <p style="text-align: center; color: #888;">Carregando dados...</p>
+                </div>
+            </div>
+
+            <div class="card ranking-section">
+                <h3>Top 5 Talentos</h3>
+                <ul id="rankingList" class="ranking-list">
+                    </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
