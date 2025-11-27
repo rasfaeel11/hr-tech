@@ -4,6 +4,7 @@ import userRoutes from './routes/userRoutes';
 import authRoutes from './routes/authRoutes';
 import avaliacaoRoutes from './routes/avaliacaoRoutes';
 import medidaRoutes from './routes/medidaRoutes';
+import historicoRoutes from './routes/historicoRoutes';
 
 const app = express();
 app.use(express.json());
@@ -12,6 +13,7 @@ app.use(express.json());
 app.use('/auth', authRoutes);
 app.use('/usuarios', userRoutes);
 app.use('/avaliacoes', avaliacaoRoutes);
+app.use('/carreira', historicoRoutes);
 app.use('/medidas', medidaRoutes);
 
 
