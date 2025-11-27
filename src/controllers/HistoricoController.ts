@@ -55,7 +55,7 @@ export const demitirUsuario = async (req: Request, res: Response) => {
 
         // nao resolvi usar soft delete, pra faculdade nao e preciso eu acredito
         await client.query(
-            'DELETE FROM usuarios WHERE id = $1',
+            'UPDATE usuarios SET ativo = false WHERE id = $1',
             [usuario_id]
         );
 
@@ -71,7 +71,8 @@ export const demitirUsuario = async (req: Request, res: Response) => {
     } catch (error) {
         await client.query('ROLLBACK');
         console.error(error);
-        return res.status(500).json({ error: 'Erro ao processar demissão.' });
+        const mensagemErro = (error as Error).message
+        return res.status(500).json({ error: mensagemErro });
     } finally {
         client.release();
     }

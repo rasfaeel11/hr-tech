@@ -5,6 +5,7 @@ import authRoutes from './routes/authRoutes';
 import avaliacaoRoutes from './routes/avaliacaoRoutes';
 import medidaRoutes from './routes/medidaRoutes';
 import historicoRoutes from './routes/historicoRoutes';
+import dashboardRoutes from './routes/dashboardRoutes';
 
 const app = express();
 app.use(express.json());
@@ -15,6 +16,7 @@ app.use('/usuarios', userRoutes);
 app.use('/avaliacoes', avaliacaoRoutes);
 app.use('/carreira', historicoRoutes);
 app.use('/medidas', medidaRoutes);
+app.use('/dashboard', dashboardRoutes);
 
 
 const PORT = process.env.PORT || 3000;
