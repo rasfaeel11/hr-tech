@@ -49,3 +49,15 @@ form.addEventListener('submit', async (event) => {
         botao.disabled = false;
     }
 });
+
+ function toggleModal() {
+            const modal = document.getElementById('modalLogin');
+            modal.classList.toggle('active');
+        }
+
+        // Fechar se clicar fora do card
+        document.getElementById('modalLogin').addEventListener('click', function(e) {
+            if (e.target === this) {
+                toggleModal();
+            }
+        });
