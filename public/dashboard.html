@@ -3,64 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RH System | Dashboard</title>
+    <title>RH System | Área do Gestor</title>
     <link rel="stylesheet" href="css/global.css">
-    <link rel="stylesheet" href="css/dashboard.css"> </head>
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
 <body>
 
-<nav class="navbar">
-    <div class="brand">RH System</div>
+    <!-- 1. SIDEBAR (MENU LATERAL) -->
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <span>RH</span>
+        </div>
+        <ul class="sidebar-menu">
+            <li>
+                <a href="/dashboard.html" class="active">
+                    <span class="icon">📊</span> <span class="link-text">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="/funcionarios.html">
+                    <span class="icon">👥</span> <span class="link-text">Funcionários</span>
+                </a>
+            </li>
+            <li>
+                <a href="/avaliar.html">
+                    <span class="icon">⭐</span> <span class="link-text">Avaliar</span>
+                </a>
+            </li>
+            <li style="margin-top: auto;">
+                <button onclick="logout()">
+                    <span class="icon"></span> <span class="link-text">Sair</span>
+                </button>
+            </li>
+        </ul>
+    </aside>
 
-    <ul class="menu">
-        <li><a href="/dashboard.html">Dashboard</a></li>
-        <li><a href="/funcionarios.html">Funcionários</a></li>
-        <li><a href="/avaliar.html">Avaliar</a></li>
-    </ul>
-
-    <div class="user-info">
-        <span id="userName">Carregando...</span>
-        <button onclick="logout()" class="btn-logout">Sair</button>
-    </div>
-</nav>
-
-    <div class="container">
-        <h1>Visão Geral</h1>
-
-        <div class="cards-grid">
-            <div class="card-stat">
-                <h3>Total Funcionários</h3>
-                <p class="big-number" id="totalFunc">0</p>
+    <!-- 2. CONTEÚDO PRINCIPAL -->
+    <main class="main-content">
+        
+        <!-- Topo: Título e Usuário -->
+        <div class="top-bar">
+            <div class="page-title">
+                <h1>Visão Geral</h1>
+                <p style="color: #666; font-size: 14px;">Acompanhe os indicadores da sua equipe</p>
             </div>
-            <div class="card-stat">
-                <h3>Ativos</h3>
-                <p class="big-number" id="totalAtivos" style="color: var(--success)">0</p>
-            </div>
-            <div class="card-stat">
-                <h3>Desligados</h3>
-                <p class="big-number" id="totalDesligados" style="color: var(--danger)">0</p>
-            </div>
-            <div class="card-stat">
-                <h3>Demissões (30 dias)</h3>
-                <p class="big-number" id="turnover">0</p>
+            <div class="user-profile">
+                <span id="userName">Carregando...</span>
+                <div class="user-avatar">👤</div>
             </div>
         </div>
 
-        <div class="content-row">
-            <div class="card chart-section">
-                <h3>Média de Desempenho por Cargo</h3>
+        <!-- Card Grande de Resumo (Estilo "Total Acumulado" da B3) -->
+        <div class="b3-card">
+            <div class="card-header" style="border: none; padding-bottom: 0; margin-bottom: 10px;">
+                <h3 style="font-size: 16px; color: #666;">Métricas Consolidadas</h3>
+                <span style="font-size: 20px;">👁️</span> <!-- Ícone de "Olho" decorativo -->
+            </div>
+            
+            <div class="summary-strip">
+                <div class="summary-item">
+                    <div class="summary-label">Total Funcionários</div>
+                    <div class="summary-value" id="totalFunc">0</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-label">Colaboradores Ativos</div>
+                    <div class="summary-value" style="color: var(--success)" id="totalAtivos">0</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-label">Desligados</div>
+                    <div class="summary-value" style="color: #999" id="totalDesligados">0</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-label">Turnover (30d)</div>
+                    <div class="summary-value" style="color: var(--danger)" id="turnover">0</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Grid: Gráfico e Ranking -->
+        <div class="dashboard-grid">
+            
+            <!-- Coluna da Esquerda: Gráfico (Estilo "Minha Carteira") -->
+            <div class="b3-card">
+                <div class="card-header">
+                    <h3>Desempenho por Cargo</h3>
+                    <a href="/avaliar.html" class="btn-yellow">Nova Avaliação ➔</a>
+                </div>
+                
                 <div id="chartContainer" class="chart-container">
-                    <p style="text-align: center; color: #888;">Carregando dados...</p>
+                    <p style="text-align: center; color: #888; padding: 20px;">Carregando dados...</p>
                 </div>
             </div>
 
-            <div class="card ranking-section">
-                <h3>Top 5 Talentos</h3>
+            <!-- Coluna da Direita: Ranking (Estilo "Notificações") -->
+            <div class="b3-card">
+                <div class="card-header">
+                    <h3>Top Talentos</h3>
+                    <button class="btn-yellow" onclick="window.location.href='/funcionarios.html'">Ver Todos</button>
+                </div>
+                
                 <ul id="rankingList" class="ranking-list">
-                    </ul>
+                    <!-- JS preenche aqui -->
+                </ul>
             </div>
+
         </div>
-    </div>
+    </main>
 
     <script src="js/dashboard.js"></script>
+    <script>
+        // Pequeno ajuste no script para preencher a bolinha do avatar se quiser
+        const userLocal = JSON.parse(localStorage.getItem('user'));
+        if(userLocal && userLocal.nome) {
+            // Pega a primeira letra do nome
+            document.querySelector('.user-avatar').textContent = userLocal.nome.charAt(0).toUpperCase();
+        }
+    </script>
 </body>
 </html>

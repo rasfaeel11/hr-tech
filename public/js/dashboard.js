@@ -47,13 +47,12 @@ async function carregarDashboard() {
             
             const htmlBarra = `
                 <div class="bar-wrapper">
-                    <div class="bar-label">${item.cargo}</div>
-                    <div class="bar-track">
-                        <div class="bar-fill" style="width: ${porcentagem}%">
-                            ${item.media_nota}
-                        </div>
-                    </div>
-                </div>
+                <div class="bar-label">${item.cargo}</div>
+                <div class="bar-track">
+                <div class="bar-fill" style="width: ${porcentagem}%"></div>
+            </div>
+            <div class="bar-value">${Number(item.media_nota).toFixed(1)}</div>
+            </div>
             `;
             chartContainer.innerHTML += htmlBarra;
         });
@@ -64,10 +63,13 @@ async function carregarDashboard() {
 
         data.ranking.forEach(talento => {
             const htmlItem = `
-                <li class="ranking-item">
-                    <span>${talento.nome_completo} <small>(${talento.cargo})</small></span>
-                    <span class="ranking-nota">★ ${talento.nota_final}</span>
-                </li>
+        <div class="ranking-avatar">${talento.nome_completo.charAt(0)}</div>
+        <div class="ranking-info">
+            <span class="ranking-name">${talento.nome_completo}</span>
+            <span class="ranking-cargo">${talento.cargo}</span>
+        </div>
+        <span class="ranking-badge">★ ${Number(talento.nota_final).toFixed(1)}</span>
+    </li>
             `;
             rankingList.innerHTML += htmlItem;
         });
