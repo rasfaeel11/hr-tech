@@ -5,52 +5,102 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RH System | Bem-vindo</title>
     <link rel="stylesheet" href="css/global.css">
-
 </head>
 <body>
 
     <div class="split-container">
-        <!-- METADE ESQUERDA (IMAGEM) -->
+        
+        <!-- METADE ESQUERDA -->
         <div class="split-left"></div>
 
-        <!-- METADE DIREITA (TEXTO) -->
+        <!-- METADE DIREITA -->
         <div class="split-right">
-            <!-- Botão que abre o modal -->
+            
+            <!-- Botão Login -->
             <button class="login-badge-btn" onclick="toggleModal()">
                 Área de Login ➔
             </button>
 
             <div class="hero-text">
-                <h1>Transforme sua gestão de RH com o apoio da nossa equipe, <br>nos contate.</h1>
+                <h1>Transforme sua gestão de RH com o apoio da nossa equipe,<br>nos contate.</h1>
                 <a href="mailto:suporte@rhsystem.com.br">Envie um e-mail</a>
             </div>
         </div>
     </div>
 
+
+    <section class="motivos-section">
+
+        <h2>Por que escolher a RH System?</h2>
+
+        <div class="motivos-container">
+
+            <div class="motivo-item">
+                <div class="icon">⚡</div>
+                <h3>Agilidade no Processo</h3>
+                <p>
+                    Automatizamos tarefas repetitivas do dia a dia.  
+                    O que antes levava horas em planilhas manuais,  
+                    agora é feito em poucos cliques, liberando sua equipe para o que importa.
+                </p>
+            </div>
+            <div class="scroll-down" onclick="scrollToMotivos()">
+                <div class="arrow-circle">
+                    ↓
+                </div>
+            </div>
+
+            <div class="motivo-item">
+                <div class="icon">📊</div>
+                <h3>Visão Estratégica</h3>
+                <p>
+                    Dashboards intuitivos transformam dados complexos  
+                    em informação visual, facilitando a tomada de decisão  
+                    da diretoria e gestores.
+                </p>
+            </div>
+
+            <div class="motivo-item">
+                <div class="icon">🔒</div>
+                <h3>Segurança de Dados</h3>
+                <p>
+                    Suas informações estão protegidas com criptografia e  
+                    controle de acesso rigoroso, garantindo confidencialidade  
+                    para o setor de RH.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- MODAL LOGIN -->
     <div id="modalLogin" class="modal-login-overlay">
         <div class="card" style="position: relative;">
-            <!-- Botão de fechar o modal -->
-            <span onclick="toggleModal()" style="position: absolute; top: 15px; right: 20px; cursor: pointer; font-size: 24px; font-weight: bold; color: #999;">&times;</span>
+
+            <span onclick="toggleModal()" 
+                style="position: absolute; top: 15px; right: 20px; cursor: pointer; font-size: 24px; font-weight: bold; color: #999;">
+                &times;
+            </span>
 
             <div style="text-align: center; margin-bottom: 20px;">
                 <h2 style="color: var(--primary-color);">Portal RH</h2>
                 <p style="color: #666; font-size: 14px;">Entre com suas credenciais</p>
             </div>
-    
+
             <form id="loginForm">
                 <div class="input-group">
                     <label for="email">E-mail Corporativo</label>
                     <input type="email" id="email" placeholder="ex: admin@empresa.com" required>
                 </div>
-    
+
                 <div class="input-group">
                     <label for="senha">Senha</label>
                     <input type="password" id="senha" placeholder="********" required>
                 </div>
-    
+
                 <button type="submit" class="btn btn-primary" style="width: 100%;">ENTRAR</button>
             </form>
-    
+
             <p class="error-msg" id="msgErro">Login inválido</p>
         </div>
     </div>

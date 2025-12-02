@@ -61,3 +61,7 @@ form.addEventListener('submit', async (event) => {
                 toggleModal();
             }
         });
+
+function scrollToMotivos() {
+    document.querySelector(".motivos-section").scrollIntoView({ behavior: "smooth" });
+}

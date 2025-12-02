@@ -174,4 +174,127 @@ body {
             text-transform: uppercase;
             text-decoration: underline;
         }
-        
+.motivos-section {
+    padding: 5rem 3rem;
+    background: #ffffff;
+    text-align: center;
+}
+
+.motivos-section h2 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 3rem;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.motivos-container {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+}
+
+.motivo-item {
+    background: var(--bg-color);
+    padding: 2rem;
+    width: 320px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+
+.motivo-item:hover {
+    transform: translateY(-5px);
+}
+
+.icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.motivo-item h3 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.motivo-item p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+.scroll-down {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+    animation: fadeIn 1.5s ease-in-out;
+    z-index: 10;
+}
+
+.scroll-down span {
+    font-size: 3rem;
+    color: white;
+    animation: bounce 1.5s infinite;
+}
+
+/* Animação de pulo */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(8px);
+    }
+    60% {
+        transform: translateY(4px);
+    }
+}
+
+/* Fade-in inicial */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.scroll-down {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+    z-index: 10;
+}
+
+.arrow-circle {
+    width: 55px;
+    height: 55px;
+    background-color: #f1c40f; /* mesmo amarelo do seu botão */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #2c3e50; /* azul escuro, combina com o tema */
+    font-size: 28px;
+    font-weight: bold;
+    animation: bounce 1.5s infinite;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* Animação de “pulo” */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(10px);
+    }
+    60% {
+        transform: translateY(5px);
+    }
+}
